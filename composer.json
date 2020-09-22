@@ -1,0 +1,34 @@
+{
+    "name": "de-memory/media-selector",
+    "description": "媒体选择器，支持项目根目录媒体文件导入数据库",
+    "type": "library",
+    "keywords": ["laravel-admin", "extension"],
+    "homepage": "https://github.com/de-memory/media-selector",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "de-memory",
+            "email": "972985083@qq.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "encore/laravel-admin": "~1.6",
+        "intervention/image": "^2.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Encore\\MediaSelector\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Encore\\MediaSelector\\MediaSelectorServiceProvider"
+            ]
+        }
+    }
+}

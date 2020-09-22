@@ -1,0 +1,56 @@
+.upload-and-choose .heights {
+    height: 34px;
+}
+
+.upload-and-choose .upload {
+    margin-right: 10px;
+}
+
+.upload-and-choose .upload input {
+    display: none;
+}
+
+/* 模态框高度 */
+.table-responsive {
+    height: 600px;
+    overflow: auto;
+}
+
+/* 表格样式 */
+.tb_departments > tbody > tr > td {
+    text-align: center;
+}
+
+.tb_departments thead > tr > th {
+    text-align: center;
+}
+
+/* 媒体展示区 */
+.plupload-preview {
+    padding: 0 10px !important;
+    margin-bottom: 0;
+}
+
+.plupload-preview li {
+    width: 120px;
+    margin-top: 15px;
+}
+
+.plupload-preview a img {
+
+    height: 80px;
+    object-fit: cover;
+}
+
+.plupload-preview a video {
+    height: 80px;
+    object-fit: cover;
+}
+
+.plupload-preview a {
+    display: block;
+}
+
+.plupload-preview .thumbnail {
+    margin-bottom: 10px;
+}
