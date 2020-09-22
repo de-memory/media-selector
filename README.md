@@ -36,6 +36,7 @@ php artisan migrate:rollback --path=vendor/de-memory/media-selector/database/mig
 ```
 
 ### 将根目录下面的文件同步到数据库
+![图片名称](https://laravel-admin.org/storage/2020/08/15/7ZaxPdSjvZY7h0zTnwtJWp1aDLmcotlaPYcyHSbs.png)
 
 ```
 php artisan media-selector:install
