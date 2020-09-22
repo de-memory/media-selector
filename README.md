@@ -1,4 +1,5 @@
 # Laravar-admin 本地媒体选择器
+![](https://laravel-admin.org/storage/2020/09/22/nswmg1MjoRhEdT3I8eWBPi5TsNl5YqepmgjxxOeV.png)
 
 ## 依赖
 
