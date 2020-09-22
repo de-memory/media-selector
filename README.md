@@ -1,7 +1,4 @@
 # Laravar-admin 本地媒体选择器
-![1](https://github.com/de-memory/media-selector/blob/master/1.png)
-![2](https://github.com/de-memory/media-selector/blob/master/2.png)
-![3](https://github.com/de-memory/media-selector/blob/master/3.png)
 
 ## 依赖
 
