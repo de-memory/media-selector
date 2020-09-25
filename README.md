@@ -34,7 +34,20 @@ php artisan migrate --path=vendor/de-memory/media-selector/database/migrations
 php artisan media-selector:install
 ```
 
-### 参数说明
+## 更新
+
+```
+composer update
+
+// 强制发布静态资源文件
+php artisan vendor:publish --tag=media-selector --force
+
+// 清理视图缓存
+php artisan view:clear
+```
+
+
+## 参数说明
 
 ```
 /**
@@ -96,18 +109,18 @@ type(string)
 sortable()
 ```
 
-### 说明
+## 说明
 
 ```
 数据保存处理
-    1、可以用官网文档中的，模型表单回调
-    https://laravel-admin.org/docs/zh/1.x/model-form-callback
-    
-    2、可以用laravel模型处理（模型修改器）
-    https://learnku.com/docs/laravel/5.8/eloquent-mutators/3934#defining-a-mutator
+1、可以用官网文档中的，模型表单回调
+https://laravel-admin.org/docs/zh/1.x/model-form-callback
+
+2、可以用laravel模型处理（模型修改器）
+https://learnku.com/docs/laravel/5.8/eloquent-mutators/3934#defining-a-mutator
 ```
 
-### 若要回滚最后一次迁移， 以下命令。 此命令将回滚最后一次 “迁移” 的操作，只回滚该推展“迁移”。(谨慎操作)
+## 若要回滚最后一次迁移， 以下命令。 此命令将回滚最后一次 “迁移” 的操作，只回滚该推展“迁移”。(谨慎操作)
 
 ```
 php artisan migrate:rollback --path=vendor/de-memory/media-selector/database/migrations

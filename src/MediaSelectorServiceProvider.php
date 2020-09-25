@@ -26,6 +26,8 @@ class MediaSelectorServiceProvider extends ServiceProvider
             $this->loadViewsFrom($views, 'media-selector');
         }
 
+        $this->registerPublishing();
+
         if ($this->app->runningInConsole() && $assets = $extension->assets()) {
             $this->publishes(
                 [$assets => public_path('vendor/de-memory/media-selector')],
@@ -41,6 +43,19 @@ class MediaSelectorServiceProvider extends ServiceProvider
         $this->app->booted(function () {
             MediaSelector::routes(__DIR__ . '/../routes/web.php');
         });
+    }
+
+    /**
+     * Register the package's publishable resources.
+     *
+     * @return void
+     */
+    protected function registerPublishing()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([__DIR__.'/../database/migrations' => database_path('migrations')], 'media-selector-migrations');
+            $this->publishes([__DIR__.'/../resources/assets' => public_path('vendor/de-memory/media-selector')], 'media-selector-assets');
+        }
     }
 
     public function register()
