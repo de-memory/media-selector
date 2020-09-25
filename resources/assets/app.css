@@ -33,24 +33,26 @@
 
 .plupload-preview li {
     width: 120px;
-    margin-top: 15px;
-}
-
-.plupload-preview a img {
-
-    height: 80px;
-    object-fit: cover;
-}
-
-.plupload-preview a video {
-    height: 80px;
-    object-fit: cover;
+    margin-top: 10px;
 }
 
 .plupload-preview a {
     display: block;
 }
 
+.plupload-preview a .img-responsive {
+    height: 80px;
+    object-fit: cover;
+}
+
+.plupload-preview a .media-preview-fa {
+    font-size: 80px;
+}
+
 .plupload-preview .thumbnail {
     margin-bottom: 10px;
+}
+
+.fa-5x {
+    font-size: 7em !important;
 }

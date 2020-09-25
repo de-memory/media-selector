@@ -3,7 +3,9 @@
 namespace Encore\MediaSelector\RestApi\Services;
 
 use Encore\MediaSelector\Models\Media;
+use Encore\MediaSelector\RestApi\Helpers\FileUtil;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 
 class MediaService
@@ -31,13 +33,12 @@ class MediaService
                 'id' => $value->id,
                 'media_type' => $value->type,
                 'path' => $value->path,
-                'size' => sprintf('%.2f', $value->size / 1024 / 1024),
+                'size' => FileUtil::getFormatBytes($value->size),
                 'file_ext' => $value->file_ext,
-                'file_name' => $value->file_name,
+                'name' => $value->file_name,
                 'created_at' => $value->created_at,
             );
         }
-
 
         return json_encode(["total" => $list->total(), "data" => $dataList], JSON_UNESCAPED_UNICODE);
     }
@@ -62,15 +63,17 @@ class MediaService
 
         $path = $file->storeAs($folder, $file_name);
 
-        $meta = $this->_getMeta($disk, $file, $path, $type_info);
+        $getFileType = FileUtil::getFileType(Storage::disk(config('admin.upload.disk'))->url($path));
+
+        $meta = $this->_getMeta($file, $getFileType, $type_info['suffix']);
 
         $data = [
             'user_id' => $userId,
             'path' => $path,
             'file_name' => $file_name,
             'size' => $file->getSize(),
-            'type' => $type_info['type'],
-            'file_ext' => $type_info['suffix'],
+            'type' => $getFileType,
+            'file_ext' => $file->getClientOriginalExtension(),
             'disk' => $disk,
             'bucket' => $bucket,
             'meta' => $meta
@@ -79,22 +82,42 @@ class MediaService
         return Media::query()->create($data);
     }
 
-    private function _getMeta($disk, $file, $path, $type_info)
+    private function _getMeta($file, $getFileType, $format)
     {
-        switch ($type_info['type']) {
+        switch ($getFileType) {
             case 'image':
                 $manager = new ImageManager();
                 $image = $manager->make($file);
                 $meta = [
-                    'format' => $type_info['suffix'],
+                    'format' => $format,
                     'suffix' => $file->getClientOriginalExtension(),
                     'size' => $file->getSize(),
                     'width' => $image->getWidth(),
                     'height' => $image->getHeight()
                 ];
                 break;
+            case 'video':
+            case 'audio':
+            case 'powerpoint':
+            case 'code':
+            case 'zip':
+            case 'text':
+                $meta = [
+                    'format' => $format,
+                    'suffix' => $file->getClientOriginalExtension(),
+                    'size' => $file->getSize(),
+                    'width' => 0,
+                    'height' => 0
+                ];
+                break;
             default :
-                $meta = [];
+                $meta = [
+                    'format' => $format,
+                    'suffix' => $file->getClientOriginalExtension(),
+                    'size' => $file->getSize(),
+                    'width' => 0,
+                    'height' => 0
+                ];;
         }
         return $meta;
     }

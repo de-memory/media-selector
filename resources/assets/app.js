@@ -189,6 +189,19 @@
                                 html = '<img src="' + src + '" style="max-height:90px;max-width:120px" >';
                             else if (row.media_type === 'video')
                                 html = '<video src="' + src + '" controls="controls" style="max-height:90px;max-width:120px"> </video>';
+                            else if (row.media_type === 'audio')
+                                html += '<i class="fa fa-file-audio-o fa-fw " style="font-size: 90px;"></i>';
+                            else if (row.media_type === 'powerpoint')
+                                html += '<i class="fa fa-file-word-o fa-fw " style="font-size: 90px;"></i>';
+                            else if (row.media_type === 'code')
+                                html += '<i class="fa fa-file-code-o fa-fw " style="font-size: 90px;"></i>';
+                            else if (row.media_type === 'zip')
+                                html += '<i class="fa fa-file-zip-o fa-fw " style="font-size: 90px;"></i>';
+                            else if (row.media_type === 'text')
+                                html += '<i class="fa fa-file-text-o fa-fw " style="font-size: 90px;"></i>';
+                            else if (row.media_type === 'other')
+                                html += '<i class="fa fa-file fa-fw " style="font-size: 90px;"></i>';
+
 
                             return html
                         }
@@ -346,6 +359,10 @@
 
             var path = data.data.path;
 
+            var root_path = _this.root_path + path;
+
+            var file_name = data.data.name;
+
             if (_this.max_file_count === 1)
                 $('.' + _this.input_name).val(path);
             else if (_this.max_file_count > 1)
@@ -353,11 +370,30 @@
 
             var html = "";
             html += '<li>';
-            html += '<a href="' + _this.root_path + path + '" target="_blank" class="thumbnail">';
+            html += '<a href="' + root_path + '" target="_blank" class="thumbnail" title="' + file_name + '">';
             if (data.data.media_type === 'image')
-                html += '<img class="img-responsive" src="' + _this.root_path + path + '">';
+                html += '<img class="img-responsive" src="' + root_path + '">';
             else if (data.data.media_type === 'video')
-                html += '<video class="img-responsive" controls src="' + _this.root_path + path + '"></video>';
+                html += '<video class="img-responsive" controls src="' + root_path + '"></video>';
+            else if (data.data.media_type === 'audio') {
+                html += '<i class="fa fa-file-audio-o fa-fw img-responsive media-preview-fa"></i>';
+                html += '<video src="' + root_path + '" style="display: none"></video>';
+            } else if (data.data.media_type === 'powerpoint') {
+                html += '<i class="fa fa-file-word-o fa-fw img-responsive media-preview-fa"></i>';
+                html += '<video src="' + root_path + '" style="display: none"></video>';
+            } else if (data.data.media_type === 'code') {
+                html += '<i class="fa fa-file-code-o fa-fw img-responsive media-preview-fa"></i>';
+                html += '<video src="' + root_path + '" style="display: none"></video>';
+            } else if (data.data.media_type === 'zip') {
+                html += '<i class="fa fa-file-zip-o fa-fw img-responsive media-preview-fa"></i>';
+                html += '<video src="' + root_path + '" style="display: none"></video>';
+            } else if (data.data.media_type === 'text') {
+                html += '<i class="fa fa-file-text-o fa-fw img-responsive media-preview-fa"></i>';
+                html += '<video src="' + root_path + '" style="display: none"></video>';
+            } else if (data.data.media_type === 'other') {
+                html += '<i class="fa fa-file fa-fw img-responsive media-preview-fa"></i>';
+                html += '<video src="' + root_path + '" style="display: none"></video>';
+            }
             html += '</a>';
             html += '<a href="javascript:;" class="btn btn-danger btn-xs btn-trash remove_shop_media">';
             html += '<i class="fa fa-trash"></i>';
@@ -384,7 +420,7 @@
             }
         };
 
-        // 获取预览区媒体数量
+        // 获取预览区媒体值，重新组装
         MediaSelector.prototype.getInputMedia = function () {
 
             var _this = this;
@@ -402,12 +438,16 @@
                     src += b + ',';
                 });
 
+                $(content).html().replace(/<a.*?href="(.*?)"[^>]*>/ig, function (a, b) {
+                    src += b + ',';
+                });
+
             });
             var reg = new RegExp(_this.root_path, "g");//g,表示全部替换。
 
-            var src = src.replace(reg, "");
+            var srcs = src.replace(reg, "");
 
-            $('.' + _this.input_name).val(src.substring(0, src.length - 1));
+            $('.' + _this.input_name).val(srcs.substring(0, srcs.length - 1));
 
         };
 
@@ -426,21 +466,32 @@
             // 获取类型结果
             var result = '';
 
-            var img_list = ['png', 'jpg', 'jpeg', 'bmp', 'gif', 'webp', 'psd', 'svg', 'tiff']; // 匹配 image
+            // 匹配图片
+            var img_list = [
+                'bmp', 'cgm', 'djv', 'djvu', 'gif', 'ico', 'ief', 'jp2', 'jpe', 'jpeg', 'jpg', 'mac', 'pbm', 'pct', 'pgm', 'pic', 'pict',
+                'png', 'pnm', 'pnt', 'pntg', 'ppm', 'qti', 'qtif', 'ras', 'rgb', 'svg', 'tif', 'tiff', 'wbmp', 'xbm', 'xpm', 'xwd'
+            ];
 
-            var txt_list = ['txt']; // 匹配 txt
+            // 匹配音频
+            var audio_list = ['mp3', 'wav', 'flac', '3pg', 'aa', 'aac', 'ape', 'au', 'm4a', 'mpc', 'ogg'];
 
-            var exce_list = ['xls', 'xlsx']; // 匹配 excel
+            // 匹配视频
+            var video_list = ['mp4', 'rmvb', 'flv', 'mkv', 'avi', 'wmv', 'rm', 'asf', 'mpeg'];
 
-            var word_list = ['doc', 'docx']; // 匹配 word
+            // 匹配文稿
+            var powerpoint_list = [
+                'doc', 'dot', 'docx', 'dotx', 'docm', 'dotm', 'xls', 'xlt', 'xla', 'xlsx', 'xltx', 'xlsm', 'xltm', 'xlam', 'xlsb',
+                'ppt', 'pdf', 'pot', 'pps', 'ppa', 'pptx', 'potx', 'ppsx', 'ppam', 'pptm', 'potm', 'ppsm'
+            ];
 
-            var pdf_list = ['pdf']; // 匹配 pdf
+            // 匹配代码
+            var code_list = ['php', 'js', 'java', 'python', 'ruby', 'go', 'c', 'cpp', 'sql', 'm', 'h', 'json', 'html', 'aspx'];
 
-            var ppt_list = ['ppt', 'pptx']; // 匹配 ppt
+            // 匹配压缩包
+            var zip_list = ['zip', 'tar', 'gz', 'rar', 'rpm'];
 
-            var video_list = ['mp4', 'rmvb', 'flv', 'mkv', 'avi', 'wmv', 'rm', 'asf', 'mpeg']; // 匹配 video
-
-            var radio_list = ['mp3', 'wav', 'flac', '3pg', 'aa', 'aac', 'ape', 'au', 'm4a', 'mpc', 'ogg'];// 匹配audio
+            // 匹配文本
+            var text_list = ['txt', 'pac', 'log', 'md'];
 
             // 无后缀返回 false
             if (!suffix) {
@@ -457,46 +508,13 @@
                 return result;
             }
 
-            result = txt_list.some(function (item) {
+            result = audio_list.some(function (item) {
                 return item == suffix;
             });
             if (result) {
-                result = 'txt';
-                return result
-            }
-
-            result = exce_list.some(function (item) {
-                return item == suffix;
-            });
-            if (result) {
-                result = 'excel';
-                return result
-            }
-
-            result = word_list.some(function (item) {
-                return item == suffix;
-            });
-            if (result) {
-                return 'word';
-            }
-
-            result = pdf_list.some(function (item) {
-                return item == suffix;
-            })
-            if (result) {
-                result = 'pdf';
-                return result
-            }
-
-            result = ppt_list.some(function (item) {
-                return item == suffix;
-            });
-            if (result) {
-                result = 'ppt';
+                result = 'audio';
                 return result;
             }
-            ;
-
             result = video_list.some(function (item) {
                 return item == suffix;
             });
@@ -504,14 +522,36 @@
                 result = 'video';
                 return result;
             }
-
-            result = radio_list.some(function (item) {
+            result = powerpoint_list.some(function (item) {
                 return item == suffix;
             });
             if (result) {
-                result = 'audio';
+                result = 'powerpoint';
                 return result;
             }
+            result = code_list.some(function (item) {
+                return item == suffix;
+            });
+            if (result) {
+                result = 'code';
+                return result;
+            }
+            result = zip_list.some(function (item) {
+                return item == suffix;
+            });
+            if (result) {
+                result = 'zip';
+                return result;
+            }
+            result = text_list.some(function (item) {
+                return item == suffix;
+            });
+            if (result) {
+                result = 'text';
+                return result;
+            }
+
+
             // 其他 文件类型
             result = 'other';
             return result;

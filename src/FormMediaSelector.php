@@ -31,7 +31,7 @@ class FormMediaSelector extends Field
      */
     protected $move = [
         'dir' => 'upload_files',
-        'fileNameIsEncrypt' => false,
+        'fileNameIsEncrypt' => true,
     ];
 
     /**
@@ -44,15 +44,15 @@ class FormMediaSelector extends Field
     /**
      * 媒体选择类型
      *
-     * blend | 混合选择
-     * image | 图片选择
-     * video | 视频选择
-     * audio | 音频选择
-     * txt   | txt选择
-     * excel | excel选择
-     * word  | word选择
-     * pdf   | pdf选择
-     * ppt   | word选择
+     * blend            混合选择
+     * image            图片选择
+     * video            视频选择
+     * audio            音频选择
+     * powerpoint       文稿选择
+     * code             代码文件选择
+     * zip              压缩包选择
+     * text             文本选择
+     * other            其他选择
      *
      * @var string
      */
@@ -69,11 +69,11 @@ class FormMediaSelector extends Field
         'image' => '图片',
         'video' => '视频',
         'audio' => '音频',
-        'txt' => 'Txt',
-        'excel' => 'Excel',
-        'word' => 'Word',
-        'Pdf' => 'pdf',
-        'ppt' => 'Ppt',
+        'powerpoint' => '文稿',
+        'code' => '代码',
+        'zip' => '压缩包',
+        'text' => '文本选择',
+        'other' => '其它',
     ];
 
     /**
@@ -81,7 +81,7 @@ class FormMediaSelector extends Field
      * @param bool $fileNameIsEncrypt
      * @return $this
      */
-    public function move($dir, $fileNameIsEncrypt = false)
+    public function move($dir, $fileNameIsEncrypt = true)
     {
         $this->move = [
             'dir' => $dir,

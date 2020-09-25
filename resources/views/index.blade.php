@@ -91,8 +91,7 @@
 
                             <span id="{{$name}}PercentModal"></span>
 
-                            <input type="file" accept="video/*,image/*" id="{{$name}}MediaUploadModal"
-                                   @if($maxFileCount > 1) multiple @endif style="display: none;">
+                            <input type="file" id="{{$name}}MediaUploadModal" multiple style="display: none;">
 
                          </label>
 

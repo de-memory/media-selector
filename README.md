@@ -1,14 +1,12 @@
-# Laravar-admin 本地媒体选择器
-![](https://laravel-admin.org/storage/2020/09/22/nswmg1MjoRhEdT3I8eWBPi5TsNl5YqepmgjxxOeV.png)
+# Laravar-admin 媒体资源选择器
+
+![图片名称](https://laravel-admin.org/storage/2020/09/25/C8WZmrKi6Ocl7zYRxiaLgbMrFHfWmjUm0Ct77U73.png)
 
 ## 依赖
-
-  -    | 版本  
- ---- | ----- 
- php  | >=7.0.0 
- encore/laravel-admin  | >=~1.6 
- intervention/image  | >= ^2.4
-
+ 
+- php  | >=7.0.0
+- encore/laravel-admin  | >=~1.6 
+- intervention/image  | >= ^2.4 
 
 ## 安装
 
@@ -30,13 +28,7 @@ php artisan vendor:publish --provider=Encore\MediaSelector\MediaSelectorServiceP
 php artisan migrate --path=vendor/de-memory/media-selector/database/migrations
 ```
 
-### 回滚数据库（这里是指删除，数据库表）
-
-```
-php artisan migrate:rollback --path=vendor/de-memory/media-selector/database/migrations
-```
-
-### 将根目录下面的文件同步到数据库
+### 将根目录下面的文件同步到数据库(可以不执行。如果执行会去掉数据库已有的，根据path字段过滤)
 
 ```
 php artisan media-selector:install
@@ -61,12 +53,62 @@ $form->mediaSelector('avatar', '头像')->move('user', true)->type('image')->hel
 */
 $form->mediaSelector('avatar1', '头像1')->maxFileCount(3)->sortable()->help('最多上传或选择三个媒体文件，可推动排序');
 
-maxFileCount(int)：媒体选择数量（默认1）
+/*
+|--------------------------------------------------------------------------
+| 媒体选择数量。默认1
+|--------------------------------------------------------------------------
+*/
+maxFileCount(int)
 
-move(dir,false)： 第一个参数上传路径（默认upload_files），第二个参数上传的文件是否加密（默认false）
+/*
+|--------------------------------------------------------------------------
+| 媒体上传路径，媒体名称是否加密
+|--------------------------------------------------------------------------
+| 第一个参数，媒体上传路径。默认upload_files
+| 第二个参数，媒体名称是否加密。默认true
+|
+| 注意：第二个参数如果是false，上传文件时，跟已上传的文件名称相同，会覆盖已上传的文件
+| 
+*/
+move(string, boolean)
 
-type(blend)：blend | 混合选择，image | 图片选择，video | 视频选择，udio | 音频选择，txt   | txt选择，excel | excel选择，word  | word选择，pdf   | pdf选择，ppt   | word选择
+/*
+|--------------------------------------------------------------------------
+| 媒体选择类型。默认blend
+|--------------------------------------------------------------------------
+| blend            混合选择
+| image            图片选择
+| video            视频选择
+| audio            音频选择
+| powerpoint       文稿选择
+| code             代码文件选择
+| zip              压缩包选择
+| text             文本选择
+| other            其他选择
+*/
+type(string)
 
-sortable()：开启推动排序（默认关闭）
+/*
+|--------------------------------------------------------------------------
+| 开启推动排序。
+|--------------------------------------------------------------------------
+*/
+sortable()
+```
 
+### 说明
+
+```
+数据保存处理
+    1、可以用官网文档中的，模型表单回调
+    https://laravel-admin.org/docs/zh/1.x/model-form-callback
+    
+    2、可以用laravel模型处理（模型修改器）
+    https://learnku.com/docs/laravel/5.8/eloquent-mutators/3934#defining-a-mutator
+```
+
+### 若要回滚最后一次迁移， 以下命令。 此命令将回滚最后一次 “迁移” 的操作，只回滚该推展“迁移”。(谨慎操作)
+
+```
+php artisan migrate:rollback --path=vendor/de-memory/media-selector/database/migrations
 ```
