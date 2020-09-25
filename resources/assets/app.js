@@ -208,7 +208,7 @@
                     },
                     {field: 'file_name', title: '名称', visible: false},
                     {field: 'media_type', title: '类型'},
-                    {field: 'size', title: '大小(M)'},
+                    {field: 'size', title: '大小'},
                     {field: 'file_ext', title: '后缀', width: '40%'},
                     {field: 'created_at', title: '创建时间', width: '150%', sortable: true},
                     {
