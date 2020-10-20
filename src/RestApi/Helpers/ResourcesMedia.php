@@ -2,10 +2,10 @@
 
 namespace Encore\MediaSelector\RestApi\Helpers;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Resources\Json\Resource;
 
-class ResourcesMedia extends Resource
+class ResourcesMedia extends JsonResource
 {
     use CustomResource;
 
