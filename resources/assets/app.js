@@ -341,15 +341,12 @@
                 formData.delete('type');
                 formData.delete('move');
                 formData.delete('_token');
-            });
-
-            if (whereToUpload == 'modal') {
+                if (i == files.length - 1 && whereToUpload == 'modal')
                 // 延迟刷新
-                setTimeout(function () {
-                    $('#' + _this.input_name + 'MediaTable').bootstrapTable('refresh').bootstrapTable();
-                }, 1000);
-            }
-
+                    setTimeout(function () {
+                        $('#' + _this.input_name + 'MediaTable').bootstrapTable('refresh').bootstrapTable();
+                    }, 500);
+            });
         };
 
         // 媒体预览

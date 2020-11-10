@@ -47,7 +47,7 @@ php artisan view:clear
 ```
 
 
-## 参数说明
+## 方法使用
 
 ```
 /**
@@ -65,7 +65,11 @@ $form->mediaSelector('avatar', '头像')->move('user', true)->type('image')->hel
 *
 */
 $form->mediaSelector('avatar1', '头像1')->maxFileCount(3)->sortable()->help('最多上传或选择三个媒体文件，可推动排序');
+```
 
+## 参数说明
+
+```
 /*
 |--------------------------------------------------------------------------
 | 媒体选择数量。默认1

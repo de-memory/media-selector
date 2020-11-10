@@ -108,8 +108,8 @@
             </div>
 
             <div class="modal-body ">
-                <div class="table-responsive panel-body">
-                    <table class="table table-bordered  table-responsive tb_departments" id="{{$name}}MediaTable">
+                <div class="table-responsives panel-body">
+                    <table class="table table-bordered  tb_departments" id="{{$name}}MediaTable">
                     </table>
                 </div>
             </div>
