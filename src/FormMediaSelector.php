@@ -18,8 +18,6 @@ class FormMediaSelector extends Field
         'vendor/de-memory/media-selector/bootstrap-table/dist/bootstrap-table.min.js',
         'vendor/de-memory/media-selector/bootstrap-table/dist/locale/bootstrap-table-zh-CN.min.js',
         'vendor/de-memory/media-selector/sortablejs/Sortable.js',
-        'vendor/de-memory/media-selector/sortablejs/st/prettify/prettify.js',
-        'vendor/de-memory/media-selector/sortablejs/st/prettify/run_prettify.js',
         'vendor/de-memory/media-selector/app.js',
     ];
 
