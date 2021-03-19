@@ -143,7 +143,7 @@ class FormMediaSelector extends Field
         ]);
 
         $label = $this->label;
-        $name = $this->column;
+        $name = $this->getElementClassString();
         $move = json_encode($this->move);
         $maxFileCount = $this->maxFileCount;
         $type = $this->type;

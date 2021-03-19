@@ -23,10 +23,10 @@
 
             var _this = this;
 
-            var value = $('input[name=' + this.input_name + ']').val();
+            var value = $('.' + this.input_name).val();
 
             // 获取name值后将input清空，防止叠加
-            $('input[name=' + this.input_name + ']').val('');
+            $('.' + this.input_name).val('');
 
             $('#' + _this.input_name + 'MediaType').select2({
                 language: 'zh-CN',
