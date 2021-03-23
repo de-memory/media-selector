@@ -1,13 +1,9 @@
-.upload-and-choose .heights {
+.button-heights {
     height: 34px;
 }
 
-.upload-and-choose .upload {
-    margin-right: 10px;
-}
-
-.upload-and-choose .upload input {
-    display: none;
+.select-button {
+    margin-left: 10px !important;
 }
 
 /* 模态框高度 */

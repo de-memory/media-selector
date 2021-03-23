@@ -11,27 +11,30 @@
             <input name="{{$name}}" class="form-control {{$class}}" placeholder="{{ $placeholder }}"
                    {!! $attributes !!} value="{{ old($column, $value) }}">
 
-            <span class="input-group-btn upload-and-choose">
+            <div class="input-group-btn input-group-append">
 
-                <label class="btn btn-danger heights upload">
-                    <i class="fa fa-upload"></i> 上传
-                    <span id="{{$name}}PercentForm"></span>
-                    <input type="file" @if($maxFileCount > 1) multiple @endif id="{{$class}}MediaUploadForm">
-                </label>
+                <div class="btn btn-danger btn-file button-heights">
+                    <i class="fa fa-upload"></i>
+                    <span class="hidden-xs">上传</span>
+                    <span id="{{$class}}PercentForm"></span>
+                    <input type="file" class="avatar" @if($maxFileCount > 1) multiple
+                           @endif id="{{$class}}MediaUploadForm">
+                </div>
 
-                <span class="btn btn-primary heights" data-toggle="modal" data-target="#{{$class}}MediaSelectorModal">
-                    <i class="fa fa-list"></i> 选择
-                </span>
-            </span>
+                <div class="btn btn-primary btn-file button-heights select-button" data-toggle="modal"
+                     data-target="#{{$class}}MediaSelectorModal">
+                    <i class="fa fa-folder-open"></i>
+                    <span class="hidden-xs">选择</span>
+                </div>
 
+            </div>
 
         </div>
 
         @include('admin::form.help-block')
 
-        <ul class="row list-inline plupload-preview" id="{{$class}}MediaDisplay">
+        <ul class="row list-inline plupload-preview" id="{{$class}}MediaDisplay"></ul>
 
-        </ul>
     </div>
 
 </div>
