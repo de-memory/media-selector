@@ -54,8 +54,6 @@
 
             var _this = this;
 
-            console.log('#' + _this.input_name + 'OpenMediaSelectorModal')
-
             // Form媒体上传事件
             $("body").delegate('#' + _this.input_name + 'MediaUploadForm', 'change', function (e) {
 
