@@ -157,8 +157,6 @@ class FormMediaSelector extends Field
                 Demo{$name}.run();
             }
             Demo{$name}.init();
-            Demo{$name}.getMediaList();
-            Demo{$name}.sortable();
         ";
 
         return parent::render();

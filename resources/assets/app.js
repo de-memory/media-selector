@@ -23,6 +23,8 @@
 
             var _this = this;
 
+            _this.sortable();
+
             var value = $('.' + this.input_name).val();
 
             // 获取name值后将input清空，防止叠加
@@ -51,6 +53,8 @@
         MediaSelector.prototype.run = function () {
 
             var _this = this;
+
+            console.log('#' + _this.input_name + 'OpenMediaSelectorModal')
 
             // Form媒体上传事件
             $("body").delegate('#' + _this.input_name + 'MediaUploadForm', 'change', function (e) {
@@ -85,6 +89,12 @@
 
                 // 操作完成后，使用如下代码，将其值置位空，则可以解决再次触发change事件时失效的问题
                 e.target.value = '';
+            });
+
+            // Form媒体选择事件
+            $("body").delegate('#' + _this.input_name + 'OpenMediaSelectorModal', 'click', function (e) {
+                $('#' + _this.input_name + 'MediaSelectorModal').modal("show");
+                _this.getMediaList()
             });
 
             // Modal媒体上传事件
@@ -558,4 +568,3 @@
         window.MediaSelector = MediaSelector;
     }
 )();
-

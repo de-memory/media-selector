@@ -21,8 +21,8 @@
                            @endif id="{{$class}}MediaUploadForm">
                 </div>
 
-                <div class="btn btn-primary btn-file button-heights select-button" data-toggle="modal"
-                     data-target="#{{$class}}MediaSelectorModal">
+                <div class="btn btn-primary btn-file button-heights select-button"
+                     id="{{$class}}OpenMediaSelectorModal">
                     <i class="fa fa-folder-open"></i>
                     <span class="hidden-xs">选择</span>
                 </div>
