@@ -22,7 +22,8 @@
                 </div>
 
                 <div class="btn btn-primary btn-file button-heights select-button"
-                     id="{{$class}}OpenMediaSelectorModal">
+                     id="{{$class}}OpenMediaSelectorModal" data-toggle="modal"
+                     data-target="#{{$class}}MediaSelectorModal">
                     <i class="fa fa-folder-open"></i>
                     <span class="hidden-xs">选择</span>
                 </div>

@@ -91,7 +91,6 @@
 
             // Form媒体选择事件
             $("body").delegate('#' + _this.input_name + 'OpenMediaSelectorModal', 'click', function (e) {
-                $('#' + _this.input_name + 'MediaSelectorModal').modal("show");
                 _this.getMediaList()
             });
 
