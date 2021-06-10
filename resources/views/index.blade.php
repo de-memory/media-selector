@@ -66,8 +66,8 @@
 
                         <label class="control-label col-sm-1">类型</label>
                         <div class="col-sm-3">
-                            <select class="form-control" id="{{$class}}MediaType" name="type" tabindex="-1"
-                                    aria-hidden="true" style="width: 100%">
+                            <select class="form-control" id="{{$class}}MediaType" name="{{$class}}MediaType"
+                                    tabindex="-1" aria-hidden="true" style="width: 100%">
                                 <option></option>
                                 @foreach($selectList as $option => $label)
                                     <option value="{{$option}}" {{$option==$type ? 'selected':''}}>{{$label}}</option>
